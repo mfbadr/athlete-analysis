@@ -1,8 +1,22 @@
-html
+doctype html
+html(ng-app='athlete-analysis', lang='en')
   head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     title Athlete Analysis
     link(rel='stylesheet', href='/vendor/bootstrap/dist/css/bootstrap.min.css')
+    //include views/master/stylesheets
   body
-    h2 Hello world!
-    p Welcome to Athlete analysis
+    .container
+      .row
+        .col-xs-12
+          h2.text-center Athlete Analysis
+          h3.text-center Powered by IBM Watson
+          div(ui-view)
+    script(src='/vendor/jquery/dist/jquery.min.js')
     script(src='/vendor/angular/angular.min.js')
+    script(src='/vendor/angular-ui-router/release/angular-ui-router.min.js')
+    script(src='/index.js')
+    script(src='/factories/athlete.js')
+    script(src='/views/home/home.js')
