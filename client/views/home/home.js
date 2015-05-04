@@ -3,15 +3,15 @@
 
   angular.module('athlete-analysis')
   .controller('HomeCtrl', ['$scope', '$state', 'Athlete', function($scope, $state, Athlete){
+    $scope.results = undefined;
 
     $scope.submit = function(){
-      alert($scope.athlete);
+      //alert($scope.athlete);
       Athlete.getResults($scope.athlete).then(function(response){
-        debugger;
-        //success
+
         console.log(response);
+        $scope.results = response.data;
       }, function(response){
-        debugger;
         //failure
         console.log(response);
       });

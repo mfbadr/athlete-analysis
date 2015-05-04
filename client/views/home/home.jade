@@ -3,3 +3,6 @@ form(role='form', name='athleteForm', autofocus, required)
     label(for='athlete') Enter an Athlete
     input.form-control#athlete(type='text', name='athlete', ng-model='athlete')
   button.btn.btn-primary(ng-click='submit()') Analyse {{athlete}}
+hr
+div(ng-show='results')
+  pre {{results}}
