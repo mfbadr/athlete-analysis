@@ -1,13 +1,12 @@
 'use strict';
 
 var request = require('request'),
+    async = require('async'),
     G_KEY   =  process.env.G_KEY,
     AA_KEY   =  process.env.AA_KEY,
     AlchemyAPI = require('alchemy-api'),
     alchemy = new AlchemyAPI(AA_KEY),
     cx      =  '014319405928501326465:_-rvvn__nr0';
-    //googleSearch = new GoogleSearch({
-    //});
 
 //oooooh my god this feels so hacky
 AlchemyAPI.prototype.target = function(data, options, cb){
@@ -15,8 +14,6 @@ AlchemyAPI.prototype.target = function(data, options, cb){
 };
 
 exports.getResults = function(athleteName, req, res){
-  console.log('gkey', G_KEY);
-  console.log('akey', AA_KEY);
   request('https://www.googleapis.com/customsearch/v1?key=' + G_KEY + '&cx=' + cx + '&q=' + athleteName, function(err, response, body){
         if(err){res.send(err);}else{
           var links = [];
@@ -25,18 +22,22 @@ exports.getResults = function(athleteName, req, res){
             links.push(body.items[i].link);
           }
 
-          console.log('url', links[0]);
-          //alchemy.entities(links[0], {sentiment:1, outputMode:'json'}, function(err, alchemyResponse){
-          //alchemy.entities(links[0], {sentiment:1, outputMode:'json'}, function(err, alchemyResponse){
+          var getTargettedSentiment = function(link, cb){
+            alchemy.target(link, {target:athleteName, outputMode:'json'}, function(err, alchemyResponse){
+              delete alchemyResponse.usage;
+              cb(err, alchemyResponse);
+            });
+          };
+
+          async.map(links, getTargettedSentiment, function(err, finalResponse){
+            res.send({data: finalResponse});
+          });
+            /*
           alchemy.target(links[0], {target:athleteName, outputMode:'json'}, function(err, alchemyResponse){
             if(err){res.send(err);}
-            //console.log(Object.keys(alchemyResponse));
-            //alchemyResponse = JSON.parse(alchemyResponse);
-            //alchemyresponse.entities is an array of entities
-            //
-
             res.send({data: alchemyResponse});
           });
+          */
         }
   });
 };

@@ -6,8 +6,8 @@ form(role='form', name='athleteForm', autofocus, required)
 hr
 div(ng-show='results')
   
-  //div(ng-repeat='result in results.data')
-  pre {{results}}
+  div(ng-repeat='result in results.data')
+    pre {{result}}
 
 
 
