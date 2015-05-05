@@ -16,10 +16,14 @@ AlchemyAPI.prototype.target = function(data, options, cb){
 
 exports.getResults = function(athleteName, req, res){
   request('https://www.googleapis.com/customsearch/v1?key=' + G_KEY + '&cx=' + cx + '&q=' + athleteName, function(err, response, body){
+        var totalResults;
         if(err){console.log(err);}
         if(err){res.send(err);}else{
           var links = [];
           body = JSON.parse(body);
+          console.log('>>>>>>>', body.queries.nextPage[0].totalResults);
+          totalResults = body.queries.nextPage[0].totalResults;
+
           for(var i = 0; i < body.items.length; i++){
             links.push(body.items[i].link);
           }
@@ -35,24 +39,14 @@ exports.getResults = function(athleteName, req, res){
           async.map(links, getTargettedSentiment, function(err, finalResponse){
             if(err){console.log(err);}
             finalResponse = _.remove(finalResponse, function(n){
-              if(n.status === 'ERROR'){console.log('alchemy error', n);}
+              //if(n.status === 'ERROR'){console.log('alchemy error', n);}
               return n.status === 'OK';
             });
 
-            res.send({data: finalResponse, target: athleteName});
+            res.send({'data': finalResponse, 'target': athleteName, 'totalResults':totalResults});
           });
         }
   });
 };
 
 
-  //GET https://www.googleapis.com/customsearch/v1?key=INSERT_YOUR_API_KEY&cx=017576662512468239146:omuauf_lfve&q=lectures
-//'/url/URLGetRankedNamedEntities'
-/*
-function getEntities(url) {
-  alchemyapi.entities('url', URL,{ 'sentiment':1 }, function(response) {
-    output['entities'] = { text:demo_text, response:JSON.stringify(response,null,4), results:response['entities'] };
-    keywords(req, res, output);
-  });
-}
-*/

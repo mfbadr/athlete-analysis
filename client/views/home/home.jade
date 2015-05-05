@@ -17,6 +17,7 @@
     h3.text-center Average sentiment: {{results.averageSentiment.toFixed(5)}} &nbsp;
       i.fa.fa-2x.fa-thumbs-up(ng-if='results.averageSentiment > 0')
       i.fa.fa-2x.fa-thumbs-down(ng-if='results.averageSentiment < 0')
+    h5.text-center.small Performed targetted sentiment analysis on {{results.data.length}} of {{results.totalResults}} sites
 
     div(ng-repeat='result in results.data')
       ul
