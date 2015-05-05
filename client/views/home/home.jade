@@ -8,8 +8,11 @@
       button.btn-lg.btn-primary.center-block#btn(ng-click='submit()') Analyse {{athlete}}
 .col-xs-12
   hr
-  div.well(ng-show='results')
-    h3.text-center Results for {{results.target}}
+  div.text-center(ng-if='results === "loading"')
+    i.fa.fa-5x.fa-spinner.fa-spin
+    h4 Getting results...
+  div.well(ng-show='results && results !== "loading"')
+    h3.text-center {{results.target}}
     div(ng-repeat='result in results.data')
       ul
         li: a.h3(href='{{result.url}}') This article has a {{result.docSentiment.type}} opinion of {{results.target}}.

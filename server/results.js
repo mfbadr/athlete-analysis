@@ -24,7 +24,7 @@ exports.getResults = function(athleteName, req, res){
           }
 
           var getTargettedSentiment = function(link, cb){
-            alchemy.target(link, {target:athleteName, outputMode:'json'}, function(err, alchemyResponse){
+            alchemy.target(link, {target:athleteName, outputMode:'json', showSourceText: 1}, function(err, alchemyResponse){
               delete alchemyResponse.usage;
               cb(err, alchemyResponse);
             });

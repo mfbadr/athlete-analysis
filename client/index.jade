@@ -5,14 +5,32 @@ html(ng-app='athlete-analysis', lang='en')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title Athlete Analysis
-    link(rel='stylesheet', href='/vendor/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='vendor/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet', href='css/style.css')
+    link(rel='stylesheet', href='vendor/font-awesome/css/font-awesome.min.css')
   body
     .container-fluid
       //-.row#header
         //-h1.text-center Athlete Analysis 
           //-span.h3.small Powered by Alchemy API and IBM Bluemix
       .row(ui-view)
+      .row#footer
+        hr
+        .col-xs-12.col-sm-4
+          .jewel
+            .inner
+              i.fa.fa-lg.fa-user
+              h4 Search a Player
+        .col-xs-12.col-sm-4
+          .jewel
+            .inner
+              i.fa.fa-lg.fa-search
+              h4 Find articles
+        .col-xs-12.col-sm-4
+          .jewel
+            .inner
+              i.fa.fa-lg.fa-bar-chart
+              h4 Sentiment Analysis
     script(src='/vendor/jquery/dist/jquery.min.js')
     script(src='/vendor/angular/angular.min.js')
     script(src='/vendor/angular-ui-router/release/angular-ui-router.min.js')
