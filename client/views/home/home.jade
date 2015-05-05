@@ -10,7 +10,7 @@
   hr
   div.well(ng-show='results')
     h3.text-center Results for {{results.target}}
-    div(ng-repeat='result in results.data', ng-if='result.status == "OK"')
+    div(ng-repeat='result in results.data')
       ul
         li: a.h3(href='{{result.url}}') This article has a {{result.docSentiment.type}} opinion of {{results.target}}.
       //pre {{result}}
