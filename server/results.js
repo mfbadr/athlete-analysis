@@ -9,6 +9,11 @@ var request = require('request'),
     //googleSearch = new GoogleSearch({
     //});
 
+//oooooh my god this feels so hacky
+AlchemyAPI.prototype.target = function(data, options, cb){
+  this._doRequest(this._getQuery(data, options, 'GetTargetedSentiment'), cb);
+};
+
 exports.getResults = function(athleteName, req, res){
   console.log('gkey', G_KEY);
   console.log('akey', AA_KEY);
@@ -21,12 +26,16 @@ exports.getResults = function(athleteName, req, res){
           }
 
           console.log('url', links[0]);
-          alchemy.entities(links[0], {sentiment:1, outputMode:'json'}, function(err, alchemyResponse){
+          //alchemy.entities(links[0], {sentiment:1, outputMode:'json'}, function(err, alchemyResponse){
+          //alchemy.entities(links[0], {sentiment:1, outputMode:'json'}, function(err, alchemyResponse){
+          alchemy.target(links[0], {target:athleteName, outputMode:'json'}, function(err, alchemyResponse){
             if(err){res.send(err);}
             //console.log(Object.keys(alchemyResponse));
             //alchemyResponse = JSON.parse(alchemyResponse);
+            //alchemyresponse.entities is an array of entities
+            //
 
-            res.send({data: alchemyResponse.entities});
+            res.send({data: alchemyResponse});
           });
         }
   });
