@@ -13,19 +13,7 @@ html(ng-app='athlete-analysis', lang='en')
         //-h1.text-center Athlete Analysis 
           //-span.h3.small Powered by Alchemy API and IBM Bluemix
       .row(ui-view)
-  .footer.navbar-default.navbar-fixed-bottom
-    .container
-      .row
-        .col-xs-12
-          p.small Developed by Elle, Eric, Katherine, Mikey And Peter for the #1stWatsonHack
-            | | 
-            a(ui-sref='home.about') About 
-            | | 
-            a(ui-sref='home.contact') Contact 
-            | | 
-            a(ui-sref='home.watson') Watson 
     script(src='/vendor/jquery/dist/jquery.min.js')
-
     script(src='/vendor/angular/angular.min.js')
     script(src='/vendor/angular-ui-router/release/angular-ui-router.min.js')
     script(src='/index.js')

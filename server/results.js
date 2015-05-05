@@ -1,12 +1,13 @@
 'use strict';
 
-var request = require('request'),
-    async = require('async'),
-    G_KEY   =  process.env.G_KEY,
-    AA_KEY   =  process.env.AA_KEY,
+var request    = require('request'),
+    async      = require('async'),
+    _          = require('lodash'),
+    G_KEY      = process.env.G_KEY,
+    AA_KEY     = process.env.AA_KEY,
     AlchemyAPI = require('alchemy-api'),
-    alchemy = new AlchemyAPI(AA_KEY),
-    cx      =  '014319405928501326465:_-rvvn__nr0';
+    alchemy    = new AlchemyAPI(AA_KEY),
+    cx         = '014319405928501326465:_-rvvn__nr0';
 
 //oooooh my god this feels so hacky
 AlchemyAPI.prototype.target = function(data, options, cb){
@@ -30,6 +31,10 @@ exports.getResults = function(athleteName, req, res){
           };
 
           async.map(links, getTargettedSentiment, function(err, finalResponse){
+            finalResponse = _.remove(finalResponse, function(n){
+              return n.status === 'OK';
+            });
+
             res.send({data: finalResponse, target: athleteName});
           });
         }
