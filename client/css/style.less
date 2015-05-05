@@ -1,6 +1,9 @@
 @darkerblue: #3D6D99;
 @lighterblue: #4C8ECC;
 @pale: #ABD7FF;
+@transparentPale: rgba(171, 215, 255, .7);
+;
+
 @dark: #566B7F;
 @egg: #5FB2FF;
 @veniceblue: #2B5174;
@@ -11,12 +14,13 @@ html{
 
 body{
   width: 100%;
-  background-color: @veniceblue;
+  padding-bottom: 25px;
+  //background-color: @veniceblue;
 }
 
-#header{
-  color: @pale;
-}
+/*#header{*/
+  /*color: @pale;*/
+/*}*/
 
 .well{
   margin-bottom: 0px;
@@ -26,10 +30,30 @@ body{
   margin-bottom: 0px;
 }
 #formWrapper{
-  background-color: @lighterblue;
+  //background-color: @lighterblue;
+  background: url('../assets/football.jpeg') no-repeat;
+  background-size: cover;
+  /*background-position: 0% 75%;*/
+  height: 600px;
   display: inline;
-  padding: 14px;
   width: 100%;
-  overflow: auto;
-  border-radius: 5px;
+  //position: absolute;
+  //overflow: auto;
+  //border-radius: 5px;
 }
+
+#formWell{
+  /*position: relative;*/
+  //opacity: 0.7;
+  padding: 15px;
+
+  /*display: table-cell;*/
+  vertical-align: middle;
+  border: 1px solid black;
+  margin: 0 auto;
+  margin-top: 300px;
+  background-color: @transparentPale;
+
+}
+
+
