@@ -30,14 +30,8 @@ exports.getResults = function(athleteName, req, res){
           };
 
           async.map(links, getTargettedSentiment, function(err, finalResponse){
-            res.send({data: finalResponse});
+            res.send({data: finalResponse, target: athleteName});
           });
-            /*
-          alchemy.target(links[0], {target:athleteName, outputMode:'json'}, function(err, alchemyResponse){
-            if(err){res.send(err);}
-            res.send({data: alchemyResponse});
-          });
-          */
         }
   });
 };

@@ -9,13 +9,10 @@ var express = require('express'),
     results = require('./results'),
     app = express();
 
-// serve the files out of ./public as our main files
-//app.use(express.static(__dirname + '/public'));
 app.use(serveStatic(__dirname + '/../public'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-
 
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();

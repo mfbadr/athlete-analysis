@@ -1,13 +1,17 @@
-form(role='form', name='athleteForm', autofocus, required)
-  .form-group
-    label(for='athlete') Enter an Athlete
-    input.form-control#athlete(type='text', name='athlete', ng-model='athlete')
-  button.btn.btn-primary(ng-click='submit()') Analyse {{athlete}}
-hr
-div(ng-show='results')
-  
-  div(ng-repeat='result in results.data')
-    pre {{result}}
-
+.col-xs-12#formWrapper
+  .well
+    form(role='form', name='athleteForm', autofocus, required)
+      .form-group
+        p.h3.text-center#label(for='athlete') Enter an Athlete
+        input.form-control#athlete(type='text', name='athlete', ng-model='athlete')
+      button.btn-lg.btn-primary.center-block#btn(ng-click='submit()') Analyse {{athlete}}
+.col-xs-12
+  hr
+  div.well(ng-show='results')
+    h3.text-center Results for {{results.target}}
+    div(ng-repeat='result in results.data', ng-if='result.status == "OK"')
+      ul
+        li: a.h3(href='{{result.url}}') This article has a {{result.docSentiment.type}} opinion of {{results.target}}.
+      //pre {{result}}
 
 

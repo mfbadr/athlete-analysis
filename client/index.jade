@@ -6,15 +6,26 @@ html(ng-app='athlete-analysis', lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title Athlete Analysis
     link(rel='stylesheet', href='/vendor/bootstrap/dist/css/bootstrap.min.css')
-    //include views/master/stylesheets
+    link(rel='stylesheet', href='css/style.css')
   body
+    .container
+      .row#header
+        h1.text-center Athlete Analysis 
+          span.h3.small Powered by Alchemy API
+      .row(ui-view)
+  .footer.navbar-default.navbar-fixed-bottom
     .container
       .row
         .col-xs-12
-          h2.text-center Athlete Analysis
-          h3.text-center Powered by IBM Watson
-          div(ui-view)
+          p.small Developed by Elle, Eric, Katherine, Mikey And Peter for the #1stWatsonHack
+            | | 
+            a(ui-sref='home.about') About 
+            | | 
+            a(ui-sref='home.contact') Contact 
+            | | 
+            a(ui-sref='home.watson') Watson 
     script(src='/vendor/jquery/dist/jquery.min.js')
+
     script(src='/vendor/angular/angular.min.js')
     script(src='/vendor/angular-ui-router/release/angular-ui-router.min.js')
     script(src='/index.js')
