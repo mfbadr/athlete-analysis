@@ -16,6 +16,7 @@ AlchemyAPI.prototype.target = function(data, options, cb){
 
 exports.getResults = function(athleteName, req, res){
   request('https://www.googleapis.com/customsearch/v1?key=' + G_KEY + '&cx=' + cx + '&q=' + athleteName, function(err, response, body){
+        if(err){console.log(err);}
         if(err){res.send(err);}else{
           var links = [];
           body = JSON.parse(body);
@@ -25,13 +26,16 @@ exports.getResults = function(athleteName, req, res){
 
           var getTargettedSentiment = function(link, cb){
             alchemy.target(link, {target:athleteName, outputMode:'json', showSourceText: 1}, function(err, alchemyResponse){
+              if(err){console.log(err);}
               delete alchemyResponse.usage;
               cb(err, alchemyResponse);
             });
           };
 
           async.map(links, getTargettedSentiment, function(err, finalResponse){
+            if(err){console.log(err);}
             finalResponse = _.remove(finalResponse, function(n){
+              if(n.status === 'ERROR'){console.log('alchemy error', n);}
               return n.status === 'OK';
             });
 
