@@ -12,10 +12,17 @@
     i.fa.fa-5x.fa-spinner.fa-spin
     h4 Getting results...
   div.well(ng-show='results && results !== "loading"')
-    h3.text-center {{results.target}}
+    h2.text-center {{results.target}}
+    h3.text-center Average sentiment: {{results.averageSentiment.toFixed(5)}} &nbsp;
+      i.fa.fa-2x.fa-thumbs-up(ng-if='results.averageSentiment > 0')
+      i.fa.fa-2x.fa-thumbs-down(ng-if='results.averageSentiment < 0')
+    
+
     div(ng-repeat='result in results.data')
       ul
-        li: a.h3(href='{{result.url}}') This article has a {{result.docSentiment.type}} opinion of {{results.target}}.
+        li: a.h3(href='{{result.url}}') This article has a {{result.docSentiment.type}} opinion of {{results.target}}. &nbsp;
+          span.small(ng-if='result.docSentiment.score') Sentiment score of {{result.docSentiment.score}}
+          span.small(ng-if='!result.docSentiment.score') No sentiment score for neutral articles.
       //pre {{result}}
 
 
