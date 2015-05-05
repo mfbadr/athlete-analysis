@@ -5,4 +5,9 @@ form(role='form', name='athleteForm', autofocus, required)
   button.btn.btn-primary(ng-click='submit()') Analyse {{athlete}}
 hr
 div(ng-show='results')
-  pre {{results}}
+  
+  div(ng-repeat='result in results.data')
+    pre {{result}}
+
+
+

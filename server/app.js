@@ -6,6 +6,7 @@ var express = require('express'),
     morgan = require('morgan'),
     serveStatic = require('serve-static'),
     bodyParser = require('body-parser'),
+    results = require('./results'),
     app = express();
 
 // serve the files out of ./public as our main files
@@ -21,7 +22,8 @@ var appEnv = cfenv.getAppEnv();
 
 app.route('/results')
   .post(function(req, res){
-    res.send(req.body);
+    //res.send(req.body);
+    results.getResults(req.body.athleteName, req, res);
   });
 
 
